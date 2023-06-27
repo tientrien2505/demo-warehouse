@@ -1,0 +1,1 @@
+EMPLOYEE_SOURCE = 's3a://warehouse3/employee/data_test.parquet'
