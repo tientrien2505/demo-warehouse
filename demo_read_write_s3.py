@@ -31,7 +31,7 @@ def write_data(df: DataFrame) -> None:
 
 
 if __name__ == '__main__':
-    spark = SparkSession.Builder().getOrCreate()
+    spark = SparkSession.Builder().config("spark.hadoop.fs.s3a.aws.credentials.provider", "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider").getOrCreate()
     input_data = read_data(spark=spark)
     df = process_data(input_data=input_data)
     write_data(df)
