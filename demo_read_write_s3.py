@@ -34,5 +34,7 @@ def write_data(df: DataFrame) -> None:
 if __name__ == '__main__':
     spark = SparkSession.Builder().getOrCreate()
     input_data = read_data(spark=spark)
+    input_data.employee_df.show()
     df = process_data(input_data=input_data)
+    df.show()
     write_data(df)
