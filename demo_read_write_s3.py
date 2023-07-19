@@ -1,8 +1,9 @@
 from pyspark.sql import SparkSession, DataFrame
 from sources import EMPLOYEE_SOURCE
 from pyspark.sql import functions as F
+from dataclasses import dataclass
 
-
+@dataclass
 class InputData:
     employee_df: DataFrame
 
@@ -31,7 +32,7 @@ def write_data(df: DataFrame) -> None:
 
 
 if __name__ == '__main__':
-    spark = SparkSession.Builder().appName('pyspark-pi1').getOrCreate()
+    spark = SparkSession.Builder().getOrCreate()
     input_data = read_data(spark=spark)
     df = process_data(input_data=input_data)
     write_data(df)
