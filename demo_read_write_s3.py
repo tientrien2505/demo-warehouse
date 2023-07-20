@@ -31,7 +31,7 @@ def process_data(input_data: InputData) -> DataFrame:
 
 
 def write_data(df: DataFrame) -> None:
-    path = 's3://truongdt3-test/processed_employee/'
+    path = 's3a://truongdt3-test/processed_employee/'
     logger.info(f'Writing df to {path}')
     df.write.parquet(
         path=path,
