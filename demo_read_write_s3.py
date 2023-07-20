@@ -13,7 +13,7 @@ class InputData:
 
 
 def read_data(spark: SparkSession) -> InputData:
-    logger.info(f'Loading data {calculate_execution_delta}')
+    logger.info(f'Loading data {EMPLOYEE_SOURCE}')
     employee_df = spark.read.parquet(EMPLOYEE_SOURCE)
     return InputData(
         employee_df=employee_df
