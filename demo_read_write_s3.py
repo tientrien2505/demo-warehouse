@@ -3,12 +3,17 @@ from sources import EMPLOYEE_SOURCE
 from pyspark.sql import functions as F
 from dataclasses import dataclass
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 @dataclass
 class InputData:
     employee_df: DataFrame
 
 
 def read_data(spark: SparkSession) -> InputData:
+    logger.info(f'Loading data {calculate_execution_delta}')
     employee_df = spark.read.parquet(EMPLOYEE_SOURCE)
     return InputData(
         employee_df=employee_df
@@ -16,6 +21,7 @@ def read_data(spark: SparkSession) -> InputData:
 
 
 def process_data(input_data: InputData) -> DataFrame:
+    logger.info(f'Processing employee dataframe')
     employee_df = input_data.employee_df
     processed_employee_df = (
         employee_df
@@ -25,8 +31,10 @@ def process_data(input_data: InputData) -> DataFrame:
 
 
 def write_data(df: DataFrame) -> None:
+    path = 's3://truongdt3-test/processed_employee/'
+    logger.info(f'Writing df to {path}')
     df.write.parquet(
-        path='s3://truongdt3-test/processed_employee/',
+        path=path,
         mode='overwrite',
     )
 
