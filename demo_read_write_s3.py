@@ -26,7 +26,7 @@ def process_data(input_data: InputData) -> DataFrame:
 
 def write_data(df: DataFrame) -> None:
     df.write.parquet(
-        path='s3a://truongdt3-test/processed_employee/',
+        path='s3://truongdt3-test/processed_employee/',
         mode='overwrite',
     )
 
